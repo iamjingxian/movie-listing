@@ -1,2 +1,2 @@
-# movie-listing
-webpage using pycharm
+#### movie-listing
+simple webpage using django
