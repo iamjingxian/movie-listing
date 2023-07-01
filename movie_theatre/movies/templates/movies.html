@@ -1,0 +1,116 @@
+<html>
+<body style="background-color:rgb(20, 20, 20);">
+  <div class="wrapper">
+    <style>
+        h1
+        {
+            margin:0;
+            padding:0;
+            font-size:35px;
+            line-height:55px;
+        }
+    </style>
+    <!-- HEADER -->
+    <header>
+      <div class="teamlogo">
+        <a id="logo" href="#home"><img src="https://fontmeme.com/permalink/221009/5cf0eb2d2a5c3cc17a21334b06cc95c7.png" alt="Logo Image"></a>
+        <p><br></p>
+    </div>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN MOVIE LISTINGS -->
+    <section class="main-container" >
+      <div class="location" id="home">
+          <h1 style="color:rgb(250, 250, 250);" id="home" >Popular shows in Singapore</h1>
+          <div class="box">
+            {% for item in all %}
+            <a href=""><img src= {{item.movieImgUrl}}
+                width="289" 
+                height="160"></a>
+            <p style="color:rgb(250, 250, 250);" >Movie Title: {{item.movieTitle}}</p>
+            <p style="color:rgb(250, 250, 250);" >Movie Advisory: {{item.movieAdvisory}}</p>
+            <p style="color:rgb(250, 250, 250);" >Movie Duration: {{item.movieDuration}} mins</p>
+
+            <form method="POST">{% csrf_token %}
+            <input type="submit" value ="Click here to buy tickets for {{item.movieTitle}}"  name="Buy Ticket" 
+            class="btn btn-primary">Buy
+            </form>
+            {% endfor %}
+          </div>
+      </div>
+    <!-- END MAIN MOVIE LISTINGS -->
+
+    <!-- Add movies form -->
+    <style>
+      label{
+        color: rgb(250, 250, 250);
+        opacity: 1;
+        font-size:20px;
+        line-height:35px;
+      }
+      </style>
+    <center>
+      <h1 style="color:rgb(250, 250, 250);" >Add your movies here!</h1>
+      {% if submitted %}
+        Your movie was submitted successfully!
+      {% else %}        
+        <form action="" method="POST">
+          {% csrf_token %}
+            {% for field in form %}
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="{{ field.name }}">{{ field.label }} : </label>
+    
+                <div class="col-sm-8">
+                    {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+          <p><br></p>
+          <input type="submit" value ="Submit" name="addmovie_btn" 
+          class="btn btn-secondary">
+        </form>
+      {% endif %}
+      <p><br></p>
+      <p><br></p>
+      </center>
+    <!-- End Add movies form -->
+
+    <!-- Delete movies form/dropdown list -->
+      <form method="POST">
+        {% csrf_token %}
+        <select name="item_delete_id">
+          <option value=""></option>
+        {% for entry in all %}
+            <option value="{{ entry.movieTitle }}">{{ entry.movieTitle }}</option>
+        {% endfor %}
+        </select>
+      <input type="submit" value ="Delete" name="delete_btn"
+      class="btn btn-secondary">
+      </form>
+    <!-- End Delete movies form/dropdown list -->
+
+    <!-- FOOTER -->
+    <style>
+      p
+      {
+        margin:0;
+        padding:0;
+        font-size:20px;
+        line-height:21px;
+      }
+  </style>
+
+    <footer>
+      <p><br></p>
+      <p style="color:rgb(250, 250, 250);" >&copy 1965-2022 NUS-DSA5101 Project 2</p>
+      <p><br></p>
+      <p style="color:rgb(250, 0, 0);"><strong>Members:</strong></p>
+      <p style="color:rgb(250, 0, 0);">Chris, Ang Zhi Ping</p>
+      <p style="color:rgb(250, 0, 0);">Russell Li JingXian</p>
+      <p style="color:rgb(250, 0, 0);">Ivan Lim ZhengYu</p>
+    </footer>
+  </div>
+</body>
+</html>
