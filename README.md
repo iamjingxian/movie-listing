@@ -1,2 +1,2 @@
 #### movie-listing
-simple webpage using django
+simple webpage showing movie listings, created using django
